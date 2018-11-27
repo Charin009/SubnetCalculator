@@ -53,7 +53,7 @@ public class SubnetGUI extends JFrame{
 		northPanelRow1.add( classBox );
 		JPanel northPanelRow2 = new JPanel();
 		northPanelRow2.add(new JLabel("Requirement:"));
-		requirementBox.setText("100");
+		requirementBox.setText("50");
 		northPanelRow2.add(requirementBox);
 		northPanelRow2.add(modeBox);
 		JPanel northPanelRow3 = new JPanel();
