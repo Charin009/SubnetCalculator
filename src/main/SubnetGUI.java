@@ -147,5 +147,9 @@ public class SubnetGUI extends JFrame{
 					+ "</div>");
 		}
 	}
+	
+	public void start(){
+		this.show();
+	}
 
 }
