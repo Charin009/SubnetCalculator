@@ -1,6 +1,6 @@
 package main;
 
-public class Calculator {
+public class SubnetCalculator {
 
 		// Input IP Address and Subnet Mask
 		// IP Address & Default Address
@@ -14,6 +14,12 @@ public class Calculator {
 		private int secondMask = 255;
 		private int thirdMask = 255;
 		private int fourthMask = 0;
+		
+		// Seperate Bit
+		private int bit = 0;
+		
+		// Bit to return
+		private int returnBit = 0;
 
 		private String Message;
 
@@ -25,7 +31,7 @@ public class Calculator {
 		private int wildMask1, wildMask2, wildMask3, wildMask4;
 		private int broadcast1, broadcast2, broadcast3, broadcast4;
 
-		public void init() {
+		public void calculate() {
 			// Calculate Network Address
 			firstNet = firstMask & firstIP;
 			secondNet = secondMask & secondIP;
@@ -65,7 +71,6 @@ public class Calculator {
 			secondIP = (int) Math.abs(Double.parseDouble(oct[1]));
 			thirdIP = (int) Math.abs(Double.parseDouble(oct[2]));
 			fourthIP = (int) Math.abs(Double.parseDouble(oct[3]));
-
 		}
 
 		public void setSubnet(String subnet) {
@@ -110,11 +115,11 @@ public class Calculator {
 		}
 		
 		public void calculateNetmaskFromNetwork(int amount,String ipClass) {
-			int bit = 0;
 			int sum = 0;
 			int exponent = 7;
 			bit = findNumberOfBit(amount);
-			if(ipClass.equals('C')){
+			returnBit = findNumberOfBit(amount);
+			if(ipClass.equalsIgnoreCase("C")){
 				if(amount > 128){
 					Message = "Out of range in Class C";
 				}
@@ -122,7 +127,7 @@ public class Calculator {
 				fourthMask = sum;
 			}
 			
-			if(ipClass.equals('B')){
+			if(ipClass.equalsIgnoreCase("B")){
 				if(amount > 16384){
 					Message = "Out of range in Class B";
 				}
@@ -138,7 +143,7 @@ public class Calculator {
 				}
 			}
 			
-			if(ipClass.equals('A')){
+			if(ipClass.equalsIgnoreCase("A")){
 				if(amount > 4194304){
 					Message = "Out of range in Class A";
 				}
@@ -161,28 +166,29 @@ public class Calculator {
 					fourthMask = 0;
 				}
 			}
-			
+			calculate();
 		}
 		
 		public void calculateNetmaskFromHost(int amount,String ipClass) {
-			int bit = 0;
 			int sum = 0;
 			int exponent = 7;
 			bit = findNumberOfBit(amount);
+			returnBit = findNumberOfBit(amount);
 			if(checkFitCase(amount)) bit+=1;
-			bit = 8 - bit;
-			if(ipClass.equals('C')){
+			if(ipClass.equalsIgnoreCase("C")){
 				if(amount > 254){
 					Message = "Out of range in Class C";
 				}
+				bit = 8 - bit;
 				sum = sumOfExponentToZero(bit ,exponent);
 				fourthMask = sum;
 			}
 			
-			if(ipClass.equals('B')){
+			else if(ipClass.equalsIgnoreCase("B")){
 				if(amount > 65534){
 					Message = "Out of range in Class B";
 				}
+				bit = 16 - bit;
 				if(bit>8){
 					bit = bit-8;
 					sum = sumOfExponentToZero(bit ,exponent);
@@ -195,10 +201,11 @@ public class Calculator {
 				}
 			}
 			
-			if(ipClass.equals('A')){
+			else if(ipClass.equalsIgnoreCase("A")){
 				if(amount > 16777214){
 					Message = "Out of range in Class A";
 				}
+				bit = 24 - bit;
 				if(bit>16){
 					bit = bit-16;
 					sum = sumOfExponentToZero(bit ,exponent);
@@ -218,9 +225,8 @@ public class Calculator {
 					fourthMask = 0;
 				}
 			}
-			
+			calculate();
 		}
-		
 		
 		 public int sumOfExponentToZero(int time,int exponent){
 			 int sum = 0;
@@ -232,12 +238,12 @@ public class Calculator {
 		 }
 		
 		public static int findNumberOfBit(int amount) {
-			int bit = 0;
+			int temp_bit = 0;
 			while(true){
-				if(amount==1) return bit;
+				if(amount==1) return temp_bit;
 				if(amount%2 != 0) amount+=1;
 				amount = amount/2;
-				bit++;	
+				temp_bit++;	
 			}
 		}
 		
@@ -274,6 +280,10 @@ public class Calculator {
 			hosts -= 2;
 			return hosts;
 		}
+		
+		public int getNumberOfNetworks() {
+			return (int) Math.pow(2, returnBit);
+		}
 
 		public String getBroadcast() {
 			return broadcast1 + "." + broadcast2 + "." + broadcast3 + "." + broadcast4;
@@ -299,8 +309,8 @@ public class Calculator {
 			return Message;
 		}
 		
-		public static void main(String[] arg){
-			System.out.println(findNumberOfBit(254));
+		public int getBit() {
+			return returnBit;
 		}
 
 }
