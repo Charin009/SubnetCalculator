@@ -15,7 +15,7 @@ public class SubnetCalculator {
 		private int thirdMask = 255;
 		private int fourthMask = 0;
 		
-		// Seperate Bit
+		// Seperated Bit
 		private int bit = 0;
 		
 		// Bit to return
@@ -63,7 +63,6 @@ public class SubnetCalculator {
 			lastHost4 = broadcast4 - 1;
 		}
 
-		// "192.168.0.1"
 		public void setIP(String ip) {
 			String[] oct = new String[5];
 			oct = ip.split("\\.");
@@ -71,47 +70,6 @@ public class SubnetCalculator {
 			secondIP = (int) Math.abs(Double.parseDouble(oct[1]));
 			thirdIP = (int) Math.abs(Double.parseDouble(oct[2]));
 			fourthIP = (int) Math.abs(Double.parseDouble(oct[3]));
-		}
-
-		public void setSubnet(String subnet) {
-			if (Message != "That isn't a valid subnet!") {
-				Message = "Results!";
-			}
-			String[] oct = subnet.split("\\.");
-			firstMask = (int) Math.abs(Double.parseDouble(oct[0]));
-			secondMask = (int) Math.abs(Double.parseDouble(oct[1]));
-			thirdMask = (int) Math.abs(Double.parseDouble(oct[2]));
-			fourthMask = (int) Math.abs(Double.parseDouble(oct[3]));
-
-			if (firstMask < 128 && firstMask != 0) {
-				firstMask = 0;
-				Message = "That isn't a valid subnet!";
-			}
-
-			if (secondMask < 128 && secondMask != 0) {
-				secondMask = 0;
-				Message = "That isn't a valid subnet!";
-			} else if (firstMask < secondMask) {
-				secondMask = 0;
-				Message = "That isn't a valid subnet!";
-			}
-
-			if (thirdMask < 128 && thirdMask != 0) {
-				thirdMask = 0;
-				Message = "That isn't a valid subnet!";
-			} else if (secondMask < thirdMask) {
-				thirdMask = 0;
-				Message = "That isn't a valid subnet!";
-			}
-
-			if (fourthMask < 128 && fourthMask != 0) {
-				fourthMask = 0;
-				Message = "That isn't a valid subnet!";
-			} else if (thirdMask < fourthMask) {
-				fourthMask = 0;
-				Message = "That isn't a valid subnet!";
-			}
-
 		}
 		
 		public void calculateNetmaskFromNetwork(int amount,String ipClass) {
