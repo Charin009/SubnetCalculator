@@ -207,7 +207,7 @@ public class SubnetCalculator {
 			}
 		}
 		
-		public boolean checkFitCase(int amount){
+		private boolean checkFitCase(int amount){
 			int starter = 0;
 			int end = 0;
 			if(amount >= Math.pow(2, 12)){
@@ -218,7 +218,7 @@ public class SubnetCalculator {
 				end = 11;
 			}
 			for(int i=starter ; i <= end;i++) {
-				if(amount == Math.pow(2, i)) return true;
+				if(amount == Math.pow(2, i) || amount == Math.pow(2, i) - 1) return true;
 			}
 			return false;
 		}
