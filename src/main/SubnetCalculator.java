@@ -78,7 +78,7 @@ public class SubnetCalculator {
 			bit = findNumberOfBit(amount);
 			returnBit = findNumberOfBit(amount);
 			if(ipClass.equalsIgnoreCase("C")){
-				if(amount > 128){
+				if(amount > 64){
 					Message = "Out of range in Class C";
 				}
 				sum = sumOfExponentToZero(bit ,exponent);
@@ -131,13 +131,13 @@ public class SubnetCalculator {
 			int sum = 0;
 			int exponent = 7;
 			bit = findNumberOfBit(amount);
-			returnBit = findNumberOfBit(amount);
 			if(checkFitCase(amount)) bit+=1;
 			if(ipClass.equalsIgnoreCase("C")){
 				if(amount > 254){
 					Message = "Out of range in Class C";
 				}
 				bit = 8 - bit;
+				returnBit = bit;
 				sum = sumOfExponentToZero(bit ,exponent);
 				fourthMask = sum;
 			}
@@ -147,6 +147,7 @@ public class SubnetCalculator {
 					Message = "Out of range in Class B";
 				}
 				bit = 16 - bit;
+				returnBit = bit;
 				if(bit>8){
 					bit = bit-8;
 					sum = sumOfExponentToZero(bit ,exponent);
@@ -164,6 +165,7 @@ public class SubnetCalculator {
 					Message = "Out of range in Class A";
 				}
 				bit = 24 - bit;
+				returnBit = bit;
 				if(bit>16){
 					bit = bit-16;
 					sum = sumOfExponentToZero(bit ,exponent);

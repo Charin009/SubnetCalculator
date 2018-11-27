@@ -42,6 +42,7 @@ public class SubnetGUI extends JFrame{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(500,500));
 		this.setLayout(new BorderLayout());
+		this.setTitle("Subnet Calculator");
 		JPanel northPanel = new JPanel();
 		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
 		northPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), "Requirement Panel"));
@@ -142,7 +143,7 @@ public class SubnetGUI extends JFrame{
 					+ "In the calculation, it requires <strong>" + calculator.getBit() + " Bits</strong> in the IP address for the " + mode.toLowerCase() + ".<br/>"
 					+ "So, our <strong>Subnet mask is "+calculator.getSubnet()+"</strong>.<br/><br/>"
 					+ "So, we can get <strong>" + calculator.getNumberOfHosts() + " hosts</strong> and <strong>" + calculator.getNumberOfNetworks() + " networks</strong>.<br/><br/>"
-					+ "The IP of  <strong>first add is " + calculator.getFirstadd() + "</strong><br/>and <strong>last add is" + calculator.getLastadd() + "</strong><br/>"
+					+ "The IP of  <strong>first add is " + calculator.getFirstadd() + "</strong><br/>and <strong>last add is " + calculator.getLastadd() + "</strong><br/>"
 					+ "and <strong>broadcast IP is " + calculator.getBroadcast() + "</strong>."
 					+ "</div>");
 		}
