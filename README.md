@@ -11,6 +11,11 @@ Subnet calculator program written in Java.
 - The project is written in Java.
 - The GUI is written using Swing.
 
+## Installation
+- You need JRE installed in your machine.
+- Download runnable JAR file from [HERE](https://github.com/Charin009/SubnetCalculator/blob/master/SubnetCalculator.jar).
+- Open the downloaded file.
+
 ## Members
 - **Charin Tantrakul** 5910545663
 - **Pappim Pipatkasrira** 5910545787
