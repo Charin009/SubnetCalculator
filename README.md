@@ -1,6 +1,6 @@
 # Subnet Calculator
 
-Subnet calculator program written in Java.
+Subnet calculator program written in Java with Swing GUI.
 
 ## Usage
 - User input the IP that will be calculate and then define the class to use; A, B or C.
